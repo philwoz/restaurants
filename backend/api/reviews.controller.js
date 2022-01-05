@@ -24,14 +24,14 @@ export default class ReviewsController {
     }
 
     static async apiUpdateReview(req, res, next) {
-        try{
+        try {
             const reviewId = req.body.review_id
             const text = req.body.text
             const date = new Date()
 
             const reviewResponse = await ReviewsDAO.updateReview(
                 reviewId,
-                req,body.userId,
+                req, body.userId,
                 text,
                 date,
             )
@@ -41,13 +41,13 @@ export default class ReviewsController {
                 res.status(400).json({ error })
             }
 
-            if (reviewResponse.modifiedCount === 0 ) {
+            if (reviewResponse.modifiedCount === 0) {
                 throw new Error(
                     "unable to update rewiew - user may not be original poster",
                 )
             }
 
-        } catch (e){
+        } catch (e) {
             res.status(500).json({ error: e.message })
         }
     }
@@ -62,7 +62,7 @@ export default class ReviewsController {
                 userId,
             )
             res.json({ status: "success" })
-        } catch (e){
+        } catch (e) {
             res.status(500).json({ error: e.message })
         }
     }
