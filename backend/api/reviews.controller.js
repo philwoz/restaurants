@@ -31,7 +31,7 @@ export default class ReviewsController {
 
             const reviewResponse = await ReviewsDAO.updateReview(
                 reviewId,
-                req, body.userId,
+                req.body.user_id,
                 text,
                 date,
             )
@@ -47,6 +47,7 @@ export default class ReviewsController {
                 )
             }
 
+            res.json({ status: "success" })
         } catch (e) {
             res.status(500).json({ error: e.message })
         }
