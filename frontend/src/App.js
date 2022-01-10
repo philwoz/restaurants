@@ -1,20 +1,20 @@
 import React from "react";
-import { Switch, Route, Link } from "react-router-dom";
+import { Routes, Route, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import AddReview from "./components/add-review"
-import Restaurant from "./components/restaurants"
+import Restaurants from "./components/restaurants"
 import RestaurantsList from "./components/restaurants-list"
 import Login from "./components/login"
 
 function App() {
   const [user, setUser] = React.useState(null);
 
-  const login = async () => {
-    setUser(user)
+  async function login(user = null) {
+    setUser(user);
   }
 
-  const logout = async () => {
+  async function logout() {
     setUser(null)
   }
   return (
@@ -31,7 +31,7 @@ function App() {
           </li>
           <li className="nav-item" >
             {user ? (
-              <a onClick={logout} className="nav-link" style={{ cursor: 'pointer' }}>
+              <a  onClick={logout}  className="nav-link" style={{ cursor: 'pointer' }}>
                 Logout {user.name}
               </a>
             ) : (
@@ -45,27 +45,27 @@ function App() {
       </nav>
 
       <div className="container mt-3">
-        <Switch>
+        <Routes>
           <Route exact path={["/", "/restaurants"]} component={RestaurantsList} />
-          <Route 
+          <Route
             path="/restaurants/:id/review"
             render={(props) => (
               <AddReview {...props} user={user} />
             )}
           />
-          <Route 
+           <Route 
             path="/restaurants/:id"
             render={(props) => (
-              <Restaurant {...props} user={user} />
+              <Restaurants {...props} user={user} />
             )}
           />
-          <Route 
+          <Route
             path="/login"
             render={(props) => (
               <Login {...props} login={login} />
             )}
           />
-        </Switch>
+        </Routes>
       </div>
     </div>
   );
