@@ -1,6 +1,6 @@
 import React from "react";
 
-function RestaurantsList() {
+const RestaurantsList = props => {
   return (
     <div className="App">
       Hello World
